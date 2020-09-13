@@ -7,19 +7,23 @@ import json
 import os,base64,hashlib
 import tradesFunctions 
 import portfolioFunctions
+import pymongo
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-app.config['MONGO_DBNAME'] = 'new_database'
-app.config["MONGO_URI"] = "mongodb://localhost:27017/smallcase_database"
-mongo = PyMongo(app)
+# app.config['MONGO_DBNAME'] = 'new_database'
+# app.config["MONGO_URI"] = "mongodb://localhost:27017/smallcase_database"
+# mongo = PyMongo(app)
+
+client = pymongo.MongoClient("mongodb+srv://root:root@cluster0.lu1ln.mongodb.net/newdatabase?retryWrites=true&w=majority")
+mongodb = client.smallcase_database
 
 '''-----------------------PORTFOLIO APIS-----------------------'''
 #ADD PORTFOLIO
 @app.route('/api/portfolio', methods=['POST'])            
 def add_portfolio():
-    portfolio = mongo.db.portfolio
+    portfolio = mongodb.portfolio
     if not request.is_json or request=={}:
         abort(405)
     
@@ -43,7 +47,7 @@ def add_portfolio():
 #FETCH HOLDINGS
 @app.route('/api/holding', methods=['GET'])            
 def get_holdings():
-    portfolio = mongo.db.portfolio
+    portfolio = mongodb.portfolio
     if not request.is_json or request=={}:
         abort(405)
 
@@ -60,8 +64,8 @@ def get_holdings():
 #FETCH PORTFOLIOS
 @app.route('/api/portfolio', methods=['GET'])            
 def get_portfolios():
-    portfolio = mongo.db.portfolio
-    trade = mongo.db.trade
+    portfolio = mongodb.portfolio
+    trade = mongodb.trade
     if not request.is_json or request=={}:
         abort(405)
 
@@ -85,8 +89,8 @@ def get_portfolios():
 #FETCH RETURNS
 @app.route('/api/returns', methods=['GET'])            
 def get_returns():
-    portfolio = mongo.db.portfolio
-    trade = mongo.db.trade
+    portfolio = mongodb.portfolio
+    trade = mongodb.trade
     if not request.is_json or request=={}:
         abort(405)
 
@@ -105,8 +109,8 @@ def get_returns():
 #ADD TRADES
 @app.route('/api/trade', methods=['POST'])            
 def add_trade():
-    trade = mongo.db.trade
-    portfolio = mongo.db.portfolio
+    trade = mongodb.trade
+    portfolio = mongodb.portfolio
     if not request.is_json or request=={}:
         abort(405)
     
@@ -136,8 +140,8 @@ def add_trade():
 #DELETE TRADES
 @app.route('/api/trade', methods=['DELETE'])            
 def delete_trade():
-    trade = mongo.db.trade
-    portfolio = mongo.db.portfolio
+    trade = mongodb.trade
+    portfolio = mongodb.portfolio
     if not request.is_json or request=={}:
         abort(405)
     
@@ -157,8 +161,8 @@ def delete_trade():
 #UPDATE TRADES
 @app.route('/api/trade', methods=['PUT'])            
 def update_trade():
-    trade = mongo.db.trade
-    portfolio = mongo.db.portfolio
+    trade = mongodb.trade
+    portfolio = mongodb.portfolio
     if not request.is_json or request=={}:
         abort(405)
     
