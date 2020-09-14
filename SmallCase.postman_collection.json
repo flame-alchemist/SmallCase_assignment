@@ -1,0 +1,252 @@
+{
+	"info": {
+		"_postman_id": "9750fb38-2d07-49b2-b373-03eb5a8dec32",
+		"name": "SmallCase",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Portfolio APIs",
+			"item": [
+				{
+					"name": "Add Portfolio",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"secID\" : \"RELI\",\n\t\"avgPrice\" : 1000,\n\t\"totalShares\": 5\n}"
+						},
+						"url": {
+							"raw": "https://smallcase-app.herokuapp.com/api/portfolio",
+							"protocol": "https",
+							"host": [
+								"smallcase-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"portfolio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Holdings",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "https://smallcase-app.herokuapp.com/api/holding",
+							"protocol": "https",
+							"host": [
+								"smallcase-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"holding"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Portfolios",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "https://smallcase-app.herokuapp.com/api/portfolio",
+							"protocol": "https",
+							"host": [
+								"smallcase-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"portfolio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Returns",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "https://smallcase-app.herokuapp.com/api/returns",
+							"protocol": "https",
+							"host": [
+								"smallcase-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"returns"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Trade APIs",
+			"item": [
+				{
+					"name": "Add Trade",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"secID\" : \"GODREJIND\",\n\t\"tradeType\" : \"Buy\",\n\t\"price\" : 2000,\n\t\"shares\" : 5\n}"
+						},
+						"url": {
+							"raw": "https://smallcase-app.herokuapp.com/api/trade",
+							"protocol": "https",
+							"host": [
+								"smallcase-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"trade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Trade",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"tradeID\" : \"5f5f0b62aa43c46b40c52851\"\n}"
+						},
+						"url": {
+							"raw": "https://smallcase-app.herokuapp.com/api/trade",
+							"protocol": "https",
+							"host": [
+								"smallcase-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"trade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Trade",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"tradeID\" : \"5f5e0f9dcb450d783464b431\",\n\t\"tradeType\" : \"Sell\",\n\t\"price\" : 400,\n\t\"shares\" : 1\n}"
+						},
+						"url": {
+							"raw": "https://smallcase-app.herokuapp.com/api/trade",
+							"protocol": "https",
+							"host": [
+								"smallcase-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"trade"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
