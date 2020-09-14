@@ -1,5 +1,5 @@
 # SmallCase_assignment
-SmallCase backend assignment
+SmallCase backend assignment (for running on local env)
 
 Used Flask framework to write the APIs and MongoDB for database storage
 
@@ -12,6 +12,7 @@ Used Flask framework to write the APIs and MongoDB for database storage
     - python3
     - flask
     - flask_pymongo
+    - pymongo
     
 ### Database dependencies
 

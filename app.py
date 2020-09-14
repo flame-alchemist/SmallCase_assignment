@@ -121,7 +121,7 @@ def add_trade():
     
     security = portfolio.find_one({"_id":secID})
     if security:
-        new_data = tradesFunctions.newTrade(None, security, request, mongo)
+        new_data = tradesFunctions.newTrade(None, security, request, mongodb)
         
         if new_data==-1:
             return jsonify({"Response Message":"Not enough shares"}), 405
@@ -129,7 +129,7 @@ def add_trade():
             return jsonify({"Response Message":"Trade type not Buy/Sell"}), 405
         
         trade.insert_one(new_data)
-        portfolioFunctions.updatePortfolio1(secID, None, "add", mongo)
+        portfolioFunctions.updatePortfolio1(secID, None, "add", mongodb)
 
         return jsonify({}),200
     else:
@@ -150,7 +150,7 @@ def delete_trade():
     currentTrade = trade.find_one({"_id":ObjectId(tradeID)})
     if currentTrade:
         secID = currentTrade["secID"]
-        portfolioFunctions.updatePortfolio1(secID, tradeID, "delete", mongo)
+        portfolioFunctions.updatePortfolio1(secID, tradeID, "delete", mongodb)
         trade.remove(currentTrade)
         return jsonify({}),200
     else:
@@ -173,14 +173,18 @@ def update_trade():
     
     currentTrade = trade.find_one({"_id":ObjectId(tradeID)})
     if currentTrade:
-        new_data = tradesFunctions.newTrade(currentTrade, None, request, mongo)
+        new_data = tradesFunctions.newTrade(currentTrade, None, request, mongodb)
         print(new_data)
         if new_data==-1:
             return jsonify({"Response Message":"Not enough shares"}), 405
         elif new_data==-2:
             return jsonify({"Response Message":"Trade type not Buy/Sell"}), 405
                 
-        portfolioFunctions.updatePortfolio2(currentTrade["secID"], tradeID, new_data, mongo)
+        result = portfolioFunctions.updatePortfolio2(currentTrade["secID"], tradeID, new_data, mongodb)
+
+        if result == -1:
+            return jsonify({"Response Message":"Shares must be positive"}), 405
+            
         trade.find_one_and_update({"_id":ObjectId(tradeID)},{"$set": new_data})
 
         return jsonify({}),200

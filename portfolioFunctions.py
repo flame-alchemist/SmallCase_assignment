@@ -1,9 +1,9 @@
 from bson.objectid import ObjectId
 
 #function to update portfolio based on a trade (only for ADD and DELETE trade)
-def updatePortfolio1(secID, tradeID, action, mongo):
-    portfolio = mongo.db.portfolio
-    trade = mongo.db.trade
+def updatePortfolio1(secID, tradeID, action, mongodb):
+    portfolio = mongodb.portfolio
+    trade = mongodb.trade
     security = portfolio.find_one({"_id":secID})
     
     newPrice = 0
@@ -41,9 +41,9 @@ def updatePortfolio1(secID, tradeID, action, mongo):
     
 
 #function to update portfolio based on a trade (only for UPDATE trade)
-def updatePortfolio2(secID, tradeID, new_data, mongo):
-    portfolio = mongo.db.portfolio
-    trade = mongo.db.trade
+def updatePortfolio2(secID, tradeID, new_data, mongodb):
+    portfolio = mongodb.portfolio
+    trade = mongodb.trade
     security = portfolio.find_one({"_id":secID})
     
     newPrice = 0
@@ -70,4 +70,6 @@ def updatePortfolio2(secID, tradeID, new_data, mongo):
             newPrice = currentPrice*currentShares - currentTrade["price"]*currentTrade["shares"]
             newPrice = newPrice/(currentShares-currentTrade["shares"])
 
+    if newShares<=0:
+        return -1
     portfolio.find_one_and_update({"_id":secID}, {"$set": {"totalShares":newShares, "avgPrice":newPrice}})

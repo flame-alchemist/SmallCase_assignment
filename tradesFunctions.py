@@ -1,5 +1,5 @@
 #function to create a new/update trade data
-def newTrade(trade, security, request, mongo):
+def newTrade(trade, security, request, mongodb):
     tradeType = request.json["tradeType"]
     price = request.json["price"]
     shares = request.json["shares"]
@@ -10,7 +10,7 @@ def newTrade(trade, security, request, mongo):
         secID = request.json["secID"]    
     elif security==None:
         secID = trade["secID"]
-        security = mongo.db.portfolio.find_one({"_id":secID})
+        security = mongodb.portfolio.find_one({"_id":secID})
 
     if tradeType=="Sell":
         totalShares = security["totalShares"]
